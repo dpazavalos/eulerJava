@@ -1,39 +1,59 @@
+/**
+ * Question:
+ *  The prime factors of 13195 are 5, 7, 13 and 29.
+ *  What is the largest prime factor of the number 600851475143 ?
+ *
+ * Solution:
+ *  From 1, find factors of our tar
+ */
+
 /*
-The prime factors of 13195 are 5, 7, 13 and 29.
-What is the largest prime factor of the number 600851475143 ?
+
+
 */
+import java.util.ArrayList;
+import java.lang.Long;
+import java.util.Collections;
 
-public static ArrayList<Integer> eulerList = new ArrayList<Integer>();
-// public static Integer TOFACTOR = 13195;
-public static BigInteger TOFACTOR = new BigInteger("600851475143");
+public class Main {
 
-// Tool to produce product from array
-public static Integer ArrProd(ArrayList<Integer> arrInt) {
-  Integer product = 1;
-  for (Integer x : arrInt){
-    product *= x;
-  }
-  return product;
-}
+  // private final static Long TO_FACTOR = 13195L;
+  private final static Long TO_FACTOR = 600851475143L;
 
-// Given The last factor found against TOFACTOR, return the next highest one
-public static Integer NextFactor(Integer lastFactor){
-  Integer next = 0;
-  for (int x=lastFactor+1; x<TOFACTOR/2; x++){
-    if (TOFACTOR%x == 0){
-      next = x;
-      break;
+  // Tool to find product from ArrayList
+  private static Long ArrProd(ArrayList<Long> arrLong) {
+    Long product = 1L;
+    for (Long x : arrLong){
+      product *= x;
     }
+    return product;
   }
-  return next;
-}
 
-// ((7/2) && (7%2));
+  // Given The last factor found against TO_FACTOR, return the next highest one
+  private static Long NextFactor(Long lastFactor){
+    Long next = 0L;
+    for (Long x=lastFactor+1; x<TO_FACTOR; x++){
+      if (TO_FACTOR %x == 0){
+        next = x;
+        break;
+      }
+    }
+    return next;
+  }
 
-// Primary logic
-eulerList.add(1); // used to start factor checks. WIll not interfere with final product
-while (ArrProd(eulerList)<TOFACTOR) {
-  Integer nextFactor = NextFactor(eulerList.get(eulerList.size()-1));
-  eulerList.add(nextFactor);
+  public static void main(String[] args) {
+    // Find each factor using modulo check. Keep searching while product of all found is < target
+    // number
+    ArrayList<Long> eulerList = new ArrayList<>();  // Holds our factors
+    eulerList.add(1L); // used to start factor checks. WIll not interfere with final product
+    while (ArrProd(eulerList)< TO_FACTOR) {
+      Long nextFactor = NextFactor(eulerList.get(eulerList.size()-1));
+      eulerList.add(nextFactor);
+    }
+    System.out.println(eulerList);                  // Factors: [1, 71, 839, 1471, 6857]
+    System.out.println(ArrProd(eulerList));         // Product: 600851475143
+    System.out.println(eulerList.get(eulerList.size()-1));  // Largest: 6857
+
+  }
 }
 
