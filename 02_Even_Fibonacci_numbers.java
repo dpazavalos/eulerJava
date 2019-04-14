@@ -13,20 +13,13 @@ Integer b = 1;
 Integer c = 0;
 Set<Integer> euler = new HashSet<>()
 
-/*
-a   b   c
-0 + 1 = 2 
-1 + 2 = 3
-2 + 3 = 5
-*/
-
 do {
-	c=a+b;
-	a=b;
-	b=c;
-    if (c%2==0){
-      euler.add(c);
-    }
+  c=a+b;
+  a=b;
+  b=c;
+  if (c%2==0){
+    euler.add(c);
+  }
 } while (c < 4_000_000);
 
 Integer sum = euler.stream().mapToInt(Integer::intValue).sum()
