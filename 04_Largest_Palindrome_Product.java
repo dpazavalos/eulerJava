@@ -1,3 +1,18 @@
+/**
+ * Question:
+ *  A palindromic number reads the same both ways. The largest palindrome made from the product of
+ *  two 2-digit numbers is 9009 = 91 × 99.
+ *  Find the largest palindrome made from the product of two 3-digit numbers.
+ *
+ * Solution:
+ *  Iteration with threading. Class PalindromeFinder iterates from 999-100, using the int as root
+ *  to call a worker thread. Each thread finds products (root*999, root*998), checks if palindrome,
+ *  and adds the first/largest to a classwide set. Additinally, workers will stop once product is
+ *  below current highest found palindrome.
+ *
+ *  Note: Palindromes are divisible by 11, wish I knew that beforehand
+ */
+
 import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.Set;
