@@ -1,10 +1,13 @@
 # eulerJava
 Repo to hold java solutions to projecteuler problems, to learn Java
 
-Files are mostly just what I copy/pasted into jshell
+https://projecteuler.net/archives
+
+Code is copied from a workspace where Main.java is the only source file. Hosted file names reference their euler questions
+
 
 
 # NOTE
-If you're in this repo I'm assuming you're doing so to judge me. That's cool.
+If you're in this repo to judge muy work, that's cool
 
-But if you're here to crib solutions then you're only robbing yourself of the skill growth. For shame.
+If you're here to crib solutions, for shame. You're only robbing yourself.
