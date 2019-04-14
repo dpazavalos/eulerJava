@@ -11,18 +11,6 @@
  *  For loop to find sum
  */
 
-/**
- *
- *  The prime factors of 13195 are 5, 7, 13 and 29.
- *  What is the largest prime factor of the number 600851475143 ?
- *
- * Solution:
- *  Find prime factors of our To_FACTOR target using modulo math. Once a prime factor is found,
- *  check the product of our factors to see if we've found all factors or not. If not, start
- *  checking from the last found factor until the next.
- *  Largest prime factor is last factor found.
- */
-
 import java.util.Set;
 import java.util.HashSet;
 import java.lang.Integer;
