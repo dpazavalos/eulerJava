@@ -61,7 +61,6 @@ public class Main {
   public static void main(String[] args) {
     DiffFinder finder = new DiffFinder();
     System.out.println(finder.FindDiffSumSquare());
-    // 235251
+    // 25164150
   }
 }
-
