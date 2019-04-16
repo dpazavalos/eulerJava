@@ -1,3 +1,18 @@
+/**
+ * Question:
+ *  2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without
+ *  any remainder.
+ *
+ *  What is the smallest positive number that is evenly divisible by all of the numbers from 1 to
+ *  20?
+ *
+ * Solution:
+ *  Iterate positive numbers, stepping by 20 to reduce bruteforce-ness. Mod divide each target
+ *  number by numbers in range in decending order (target%20, target%19...). Return first evenly
+ *  dividable number.
+ *  Nothing fancy here
+ */
+
 import java.lang.Integer;
 
 class FactorFinder {
