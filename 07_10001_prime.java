@@ -33,10 +33,8 @@ class PrimeFinder {
    */
   private boolean IsPrime(long target) {
     boolean isPrime = true;
-    int i;
-    for (i=FOUNDPRIMES.size()-1; i>-1; i--){
-      long prime = FOUNDPRIMES.get(i);
-      if (target%prime == 0){
+    for (long prime : FOUNDPRIMES) {
+      if (target%prime == 0) {
         isPrime = false;
         break;
       }
