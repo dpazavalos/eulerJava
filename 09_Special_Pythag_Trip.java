@@ -2,19 +2,9 @@
  *
  */
 
-import java.util.ArrayList;
-import java.lang.Long;
+import java.lang.Math;
 
 class PythagTripFinder {
-
-  // Prime numbers
-  // private ArrayList<Long> FOUNDPRIMES = new ArrayList<Long>();
-
-  // Pythagorean triplet where sum=1000
-  int[] pythagTrip = new int[3];
-
-  // working boolean
-  boolean working = true;
 
   // Math calls
   /**
@@ -36,55 +26,65 @@ class PythagTripFinder {
   }
 
   /**
-   * Implementation of Euclid's formula to generate and return pythagorean triples. Provide m and n
-   * https://en.wikipedia.org/wiki/Pythagorean_triple#Generating_a_triple
-   *
-   * @return Integer[3] of a, b, anc c for a
+   * Simple pythagorean triplet maker. Provided natural a and b, generate full array of [a, b, c]
+   * ( a^2 + b^2 = c^2)
+   * Raises ArithmeticException if c is non-natural
+   * @param a Side a Length
+   * @param b Side a Length
+   * @return [a, b, c]
    */
-  private int[] EuclidFormula (int m, int n){
+  private int[] TripletMaker (int a, int b){
     int[] pythagTrip = new int[3];
-    pythagTrip[0] = (m*m)-(n*n);  // a
-    pythagTrip[1] = 2*(m*n);      // b
-    pythagTrip[2] = (m*m)+(n*n);  // c
+    pythagTrip[0] = a;
+    pythagTrip[1] = b;
+    double c = Math.sqrt((a*a)+(b*b));
+    if (!(c%1==0)) {
+      throw new ArithmeticException("Natural numbers only! Generated C is non natural");
+    }
+    pythagTrip[2] = (int) c;
     return pythagTrip;
   }
 
-  /**
-   * Iterates through possible m and n pairs to find the target triplet that sums to 1000
-   * Threaded worker. Start one on even and one on odd numbers
-   */
-  class MNIterator extends Thread{
-    void run(int mStart) {
-      int m= mStart,
-          pythagSum=0;
-      int[] pythagTrip = new int[3];
-      while (pythagSum<1000) {
-        int n = m+1;
-        pythagTrip = EuclidFormula(m, n);
-        pythagSum = SumTriplet()
-
-        m += 2;
-      }
-    }
-  }
 
   /**
    * Returns the pythagorean triplet that sums to 1000, and returns the product of that triplet
    * @return
    */
-  private int[] FindTripletProduct(){
-    int[] mstarts = new int[2];
-    mstarts[0] = 2;
-    mstarts[0] = 3;
-    for (int m : mstarts){
-      MNIterator iterfind = new MNIterator();
-      iterfind.run(m);
+  void FindTripletProduct(){
+    int a= 3;
+    int b;
+    int pythagSum=0;
+    int[] pythagTrip = new int[3];
+    int finalSum = 0;
+
+    while (finalSum==0) {
+      b = a + 1;
+      pythagSum = 0;
+      while (pythagSum < 1_000) {
+        try{
+          pythagTrip = TripletMaker(a, b);
+          pythagSum = SumTriplet(pythagTrip);
+          System.out.print(a + " ");
+          System.out.print(b + " ");
+          System.out.println(pythagSum);
+          if (pythagSum==1_000){
+            finalSum = pythagSum;
+            break;
+          }
+        }
+        catch (ArithmeticException ae){
+          System.out.print("");
+        }
+        b += 1;
+      }
+      a += 1;
     }
-    while (true) {
-      MNIterator iterfind = new MNIterator();
-      iterfind.run();
+    System.out.println(finalSum);
+    for (int x : pythagTrip) {
+      System.out.print(x + " ");
     }
-    ;
+    System.out.println();
+    System.out.println(productTriplet(pythagTrip));
   }
 
 }
@@ -92,8 +92,9 @@ class PythagTripFinder {
 
 public class Main {
   public static void main(String[] args) {
-    PrimeFinder finder = new PrimeFinder();
-    System.out.println(finder.FindAPrime());
-    // 104743
+    PythagTripFinder finder = new PythagTripFinder();
+    finder.FindTripletProduct();
+    // System.out.println(finder.FindAPrime());
+    // 31875000
   }
 }
