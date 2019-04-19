@@ -6,6 +6,8 @@ import java.lang.Math;
 
 class PythagTripFinder {
 
+  private final int FinalTarget = 1_000;
+
   // Math calls
   /**
    * Finds the sum of a given pythagorean triplet
@@ -45,7 +47,6 @@ class PythagTripFinder {
     return pythagTrip;
   }
 
-
   /**
    * Returns the pythagorean triplet that sums to 1000, and returns the product of that triplet
    * @return
@@ -53,40 +54,40 @@ class PythagTripFinder {
   void FindTripletProduct(){
     int a= 3;
     int b;
-    int pythagSum=0;
+    int pythagSum;
     int[] pythagTrip = new int[3];
     int finalSum = 0;
 
     while (finalSum==0) {
       b = a + 1;
       pythagSum = 0;
-      while (pythagSum < 1_000) {
+
+      while (pythagSum < FinalTarget) {
         try{
           pythagTrip = TripletMaker(a, b);
           pythagSum = SumTriplet(pythagTrip);
-          System.out.print(a + " ");
-          System.out.print(b + " ");
-          System.out.println(pythagSum);
-          if (pythagSum==1_000){
+          if (pythagSum==FinalTarget){
+            // Final Target found
             finalSum = pythagSum;
             break;
           }
         }
         catch (ArithmeticException ae){
-          System.out.print("");
+          assert true;
         }
         b += 1;
       }
+
       a += 1;
     }
-    System.out.println(finalSum);
+
+
     for (int x : pythagTrip) {
       System.out.print(x + " ");
     }
-    System.out.println();
+    System.out.println(" = " + finalSum);
     System.out.println(productTriplet(pythagTrip));
   }
-
 }
 
 
@@ -94,7 +95,6 @@ public class Main {
   public static void main(String[] args) {
     PythagTripFinder finder = new PythagTripFinder();
     finder.FindTripletProduct();
-    // System.out.println(finder.FindAPrime());
     // 31875000
   }
 }
