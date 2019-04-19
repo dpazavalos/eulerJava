@@ -1,4 +1,17 @@
 /**
+ * Problem:
+ *  A Pythagorean triplet is a set of three natural numbers, a < b < c, for which
+ *  a^2 + b^2 = c^2
+ *  3^2 + 4^2 = 9 + 16 = 25 = 5^2
+ *  There exists exactly one Pythagorean triplet for which a + b + c = 1000
+ *  Find the producct abc
+ *
+ * Solution:
+ *  Iterate through natural number possibilities to create natural pythagorean triplets (ignoring
+ *  any where c is non-natural i.e. float via thrown exception). (3, 4, 5) Check the sum of each
+ *
+ *  Origional implementation utilized Euclidian triplet geneartor, however while Euclid's foruma
+ *  will always generate A pythag triplet, it will not generate EVERY possible triplet.
  *
  */
 
@@ -26,7 +39,6 @@ class PythagTripFinder {
   private int productTriplet(int[] pythagTrip) {
     return pythagTrip[0] * pythagTrip[1] * pythagTrip[2];
   }
-
   /**
    * Simple pythagorean triplet maker. Provided natural a and b, generate full array of [a, b, c]
    * ( a^2 + b^2 = c^2)
@@ -48,8 +60,7 @@ class PythagTripFinder {
   }
 
   /**
-   * Returns the pythagorean triplet that sums to 1000, and returns the product of that triplet
-   * @return
+   * Returns the pythagorean triplet that sums to FinalTarget, and prints the product of the triplet
    */
   void FindTripletProduct(){
     int a= 3;
@@ -72,7 +83,7 @@ class PythagTripFinder {
             break;
           }
         }
-        catch (ArithmeticException ae){
+          catch (ArithmeticException ae){
           assert true;
         }
         b += 1;
@@ -81,11 +92,13 @@ class PythagTripFinder {
       a += 1;
     }
 
-
+    // Elementes of triplet
     for (int x : pythagTrip) {
       System.out.print(x + " ");
     }
+    // Sum
     System.out.println(" = " + finalSum);
+    // Product
     System.out.println(productTriplet(pythagTrip));
   }
 }
