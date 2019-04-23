@@ -10,19 +10,21 @@
 class Eratosthenes {
 
   // "Find the sum of all primes below [TargetMax]"
-  private final int TargetMax = 2_000_000;
-  // private final int TargetMax = 1_000_000;
+  private final int TargetMax;
+  // Array of all numbers 1::TargetMax. Numbers are assigned as parsed
+  private int[] All;
 
-  // Array of all numbers 1::TargetMax
-  // Numbers are assigned as parsed
-  private int[] All = new int[TargetMax+1]; // +1 to start index on 0
+  Eratosthenes(int targetMax) {
+    TargetMax = targetMax;
+    All = new int[TargetMax+1]; // +1 to start index on 0
+  }
   // 0  : Unassigned
   // -1 : Non-Prime
 
-  void BuildAll(){
-    int i;    // Values in All
-    int val;
-    int sieveCheck; //
+  long findSum(){
+    int i;          // Values in All
+    int sieveCheck; // used to Mark multiples of i as non-prime
+    long sum = 0;   // Final total, calculated while parsing
 
     // Set starting values
     All[0] = -1;  // Placeholder for 0
@@ -30,50 +32,34 @@ class Eratosthenes {
     All[2] = 2;
 
     for (i=2; i<=TargetMax; i++){
-      // System.out.println("i = " + i);
-
-      // Assign entry value, if still 0
       if (All[i] == 0){
-        // System.out.println("  Built " + i);
+        // Value has not yet been assigned, and may still be prime
         All[i] = i;
       }
-      val = All[i];
-      if (val == -1) {
+
+      if (All[i] == -1) {
+        // Value was found to be a multiple of a prev entry, i.e. not a prime
         assert true;
-        // System.out.println("  " + i + " Is a known multiple");
       }
       else {
+        // Value is Prime. Add to sum, remove multiples from consideration (mark as -1)
+        sum += i;
         sieveCheck = i*2;
         while (sieveCheck<=TargetMax){
-          // Mark multiples of this value as -1 (Not Prime)
-          // AllChecker(sieveCheck); // Ensure is built
-          // System.out.print(sieveCheck + " ");
-          // System.out.println(All[sieveCheck]);
           All[sieveCheck] = -1; // Mark multiples of value as not prime
           sieveCheck += i;
         }
       }
     }
-
-    long sum = 0;
-    for (int x : All) {
-      if (x != -1){
-        sum += x;
-        System.out.println(x);
-      }
-    }
-
-
-    System.out.println(sum);
-
+    return sum;
   }
 }
 
 
 public class Main {
   public static void main(String[] args) {
-    Eratosthenes finder = new Eratosthenes();
-    finder.BuildAll();
-    // 31875000
+    Eratosthenes finder = new Eratosthenes(2_000_000);
+    System.out.println(finder.findSum());
+    // 142913828922
   }
 }
