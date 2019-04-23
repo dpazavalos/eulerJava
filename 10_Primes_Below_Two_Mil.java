@@ -19,8 +19,10 @@
  *
  *   All primes below 2,000,000 are created, identified and summed in a single pass
  *
+ *   For fun: file was compiled, ran, and timed. Reliably runs <30ms (i7 Win10)
+ *
  */
-
+ 
 class Eratosthenes {
 
   // "Find the sum of all primes below [TargetMax]"
@@ -72,8 +74,18 @@ class Eratosthenes {
 
 public class Main {
   public static void main(String[] args) {
+    
+    long startTime = System.nanoTime();
+    
     Eratosthenes finder = new Eratosthenes(2_000_000);
     System.out.println(finder.findSum());
     // 142913828922
+
+    long endTime = System.nanoTime();
+    
+    long timeElapsed = endTime - startTime;
+    System.out.println("Execution time in Nanoseconds  : " + timeElapsed);
+    System.out.println("Execution time in Milliseconds : " + timeElapsed/1_000_000);
+    // Typically <30ms
   }
 }
