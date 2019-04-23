@@ -4,7 +4,21 @@
  *  Find the sum of all the primes below two million.
  *
  *  Solution:
- *   Implementation of Sieve of Eratosthenes
+ *   Implementation of Sieve of Eratosthenes. Create an array of 2,000,001 null values.
+ *   Array values are either null, the actual value, or -1
+ *   Null: Not yet created
+ *   Actual Value: Coresponds to index value
+ *   -1 : Indicates a non-prime number
+ *
+ *   Knowing that fist prime is 2, set [2] to 2, mark multiples of 2 as -1 to indicate non-prime
+ *   [3] != Null, set to 3. Mark multiples of 3 as -1
+ *   [4] == -1, a known non-prime. Do not assign, Pass
+ *   [5] != Null ...
+ *
+ *   For each prime found, add to a sum total
+ *
+ *   All primes below 2,000,000 are created, identified and summed in a single pass
+ *
  */
 
 class Eratosthenes {
